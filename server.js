@@ -5,6 +5,7 @@ const {
   createQuote,
   updateQuote,
   deleteQuote,
+  getQuotesForGame,
 } = require("./controllers/quoteController.js");
 
 const app = express();
@@ -12,19 +13,22 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// GET - wszystkie cytaty
+// GET - All quotes
 app.get("/api/quotes", getQuotes);
 
-// GET - jeden cytat
+// GET - one quote
 app.get("/api/quotes/:id", getQuote);
 
-// POST - dodawanie nowego cytatu
+// GET - quotes after the title
+app.get("/api/quotes", getQuotesForGame);
+
+// POST - add new quote
 app.post("/api/quotes", createQuote);
 
-// PUT - edycja cytatu
+// PUT - edit quote
 app.put("/api/quotes/:id", updateQuote);
 
-// DELETE - usuwanie cytatu
+// DELETE - remove quote
 app.delete("/api/quotes/:id", deleteQuote);
 
 app.listen(PORT, () => {

@@ -26,6 +26,14 @@ async function create(quote) {
   return newQuote;
 }
 
+async function findByGame(game) {
+  console.log("Searching for game:", game);
+  quotes.forEach((q) => console.log("Game in quote:", q.game));
+  return quotes.filter(
+    (q) => q.game && q.game.trim().toLowerCase() === game.trim().toLowerCase()
+  );
+}
+
 async function update(id, updatedFields) {
   const index = quotes.findIndex((p) => p.id === id);
   quotes[index] = { ...quotes[index], ...updatedFields };
@@ -46,6 +54,7 @@ async function remove(id) {
 module.exports = {
   findAll,
   findById,
+  findByGame,
   create,
   update,
   remove,

@@ -5,10 +5,11 @@ let quotes = require("../quotes.json");
 // @route GET /api/quotes
 async function getQuotes(req, res) {
   try {
-    const quotes = await Quote.findAll();
-    res.status(200).json(quotes);
+    const game = req.query.game;
+    const result = game ? await Quote.findByGame(game) : await Quote.findAll();
+    res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ message: "Błąd serwera" });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -26,7 +27,28 @@ async function getQuote(req, res) {
     res.status(200).json(quote);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Błąd serwera" });
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+async function getQuotesForGame(req, res) {
+  const game = req.query.game;
+  console.log("game: ", game);
+  if (!game) {
+    return res.status(404).json({ message: "'game' parameter is required" });
+  }
+
+  try {
+    const quotes = await Quote.findByGame(game);
+
+    if (quotes.length === 0) {
+      return res.status(404).json({ message: "Game Not Found" });
+    }
+
+    res.status(200).json(quotes);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -39,7 +61,7 @@ async function createQuote(req, res) {
     if (!character || !game || !quote) {
       return res
         .status(400)
-        .json({ message: "Poprawnie uzupełnij wszystkie pola." });
+        .json({ message: "Complete all fields correctly." });
     }
 
     const newQuoteData = { character, game, quote };
@@ -48,7 +70,7 @@ async function createQuote(req, res) {
     res.status(201).json(newQuote);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Błąd serwera" });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -74,7 +96,7 @@ async function updateQuote(req, res) {
     res.status(200).json(updQuote);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Błąd serwera" });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
@@ -91,13 +113,14 @@ async function deleteQuote(req, res) {
     res.status(200).json({ message: `Quote: ${id} removed` });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Błąd serwera" });
+    res.status(500).json({ message: "Server error" });
   }
 }
 
 module.exports = {
   getQuotes,
   getQuote,
+  getQuotesForGame,
   createQuote,
   updateQuote,
   deleteQuote,

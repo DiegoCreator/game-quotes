@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "uuid": "1f6667dd-f2d1-4274-8497-6f5361c5d2fd",
     "character": "Gomez",
     "game": "Gothic 1",
@@ -12,5 +12,12 @@
     "character": "Gomez",
     "game": "Gothic 1",
     "quote": "IIIII?"
+  },
+  {
+    "id": "3",
+    "uuid": "335e9a70-9666-4872-ae59-f2e9b1558ff1",
+    "character": "Miły Bandyta",
+    "game": "Gothic 2",
+    "quote": "Przybywasz z gór to źle, bardzo źle."
   }
 ]
