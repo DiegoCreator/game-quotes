@@ -13,7 +13,10 @@ async function findById(id) {
 }
 
 async function create(quote) {
-  const newQuote = { id: uuidv4(), ...quote };
+  const maxId =
+    quotes.length > 0 ? Math.max(...quotes.map((q) => q.id || 0)) : 0;
+
+  const newQuote = { id: String(maxId + 1), uuid: uuidv4(), ...quote };
   quotes.push(newQuote);
 
   if (process.env.NODE_ENV !== "test") {

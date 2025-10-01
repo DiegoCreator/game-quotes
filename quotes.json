@@ -1,12 +1,14 @@
 [
   {
-    "uuid": "7e9b3145-3e11-496a-8a9f-728d31d444e8",
+    "id": 1,
+    "uuid": "1f6667dd-f2d1-4274-8497-6f5361c5d2fd",
     "character": "Gomez",
     "game": "Gothic 1",
     "quote": "IIIII?"
   },
   {
-    "uuid": "f43f6e94-4737-4fce-b834-bb2106958dcb",
+    "id": "2",
+    "uuid": "a3c16d36-656d-4b8d-ad56-29e1aee1e15c",
     "character": "Gomez",
     "game": "Gothic 1",
     "quote": "IIIII?"
