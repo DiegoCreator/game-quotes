@@ -9,9 +9,9 @@
   {
     "id": "2",
     "uuid": "a3c16d36-656d-4b8d-ad56-29e1aee1e15c",
-    "character": "Gomez",
+    "character": "Drax",
     "game": "Gothic 1",
-    "quote": "IIIII?"
+    "quote": "A jeśli ON dziobnie cię pierwszy, no cóż lepiej żeby nie dziobnął"
   },
   {
     "id": "3",
@@ -19,5 +19,12 @@
     "character": "Miły Bandyta",
     "game": "Gothic 2",
     "quote": "Przybywasz z gór to źle, bardzo źle."
+  },
+  {
+    "id": "4",
+    "uuid": "7052e7cb-6bd6-4ab1-b09c-371c7a0616cf",
+    "character": "Xardas",
+    "game": "Gothic 2",
+    "quote": "Przepędziłeś go to prawda"
   }
 ]

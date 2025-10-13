@@ -1,0 +1,123 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+#quotes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.quote-card {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 250px;
+  text-align: center;
+}
+
+.quote-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#quoteDetails {
+  position: relative;
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: none;
+  text-align: center;
+}
+
+#quoteDetails h2 {
+  margin-top: 0;
+  color: #0077cc;
+}
+
+#quoteDetails p {
+  margin: 10px 0;
+  font-style: italic;
+  color: #555;
+}
+
+#quoteDetails blockquote {
+  background: #f0f0f0;
+  padding: 15px;
+  border-left: 5px solid #0077cc;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+button {
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+#addQuoteBtn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  position: absolute;
+  right: 20px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#addQuoteBtn:hover {
+  background-color: #218838;
+}
+
+#submit {
+  background-color: #28a745;
+  color: #fff;
+}
+
+#submit:hover {
+  background-color: #218838;
+}
+
+.delete-btn {
+  background-color: #cc0000;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #990000;
+}
