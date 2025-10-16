@@ -21,7 +21,7 @@ app.get("/api/quotes", getQuotes);
 // GET - one quote
 app.get("/api/quotes/:id", getQuote);
 
-// GET - quotes after the title
+// GET - quotes after the game
 app.get("/api/quotes", getQuotesForGame);
 
 // POST - add new quote

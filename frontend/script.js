@@ -1,6 +1,7 @@
 const listContainer = document.getElementById("quotes-list");
 const detailsContainer = document.getElementById("quoteDetails");
 const addQuoteBtn = document.getElementById("addQuoteBtn");
+const searchInput = document.getElementById("searchInput");
 
 async function showList() {
   listContainer.style.display = "flex";
@@ -27,6 +28,42 @@ async function showDetails(id) {
 
   listContainer.style.display = "none";
   detailsContainer.style.display = "block";
+}
+
+searchInput.addEventListener("input", async () => {
+  const query = searchInput.value.trim();
+
+  if (query == "") {
+    loadQuotes();
+    return;
+  }
+
+  const res = await fetch(
+    `http://localhost:3000/api/quotes?game=${encodeURIComponent(query)}`
+  );
+  const data = await res.json();
+
+  renderQuotes(data);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "/") {
+    event.preventDefault();
+
+    searchInput.focus();
+  }
+});
+
+function renderQuotes(data) {
+  listContainer.innerHTML = "";
+
+  data.forEach((quotation) => {
+    const div = document.createElement("div");
+    div.classList.add("quote-card");
+    div.textContent = quotation.quote.slice(0, 30) + "...";
+    div.onclick = () => showDetails(quotation.id);
+    listContainer.appendChild(div);
+  });
 }
 
 async function loadQuotes() {
