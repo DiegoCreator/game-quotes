@@ -121,3 +121,35 @@ button:hover {
 .delete-btn:hover {
   background-color: #990000;
 }
+
+.edit-btn {
+  background-color: #fd7e14;
+  position: absolute;
+  left: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.edit-btn:hover {
+  background-color: #e06c00;
+}
+
+#confirmdeleteBtn {
+  background-color: #cc0000;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  margin-left: 10px;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+#confirmdeleteBtn:hover {
+  background-color: #990000;
+}

@@ -16,8 +16,13 @@ async function showDetails(id) {
     <blockquote>${quotation.quote}</blockquote>
     <button id="backBtn">Wróć</button>
     <button id="deleteBtn" class="delete-btn">Usuń</button>
+    <button id="editBtn" class="edit-btn">Edytuj</button>
   `;
 
+  document.getElementById("deleteBtn").onclick = () =>
+    showDeleteQuoteForm(quotation.id);
+  document.getElementById("editBtn").onclick = () =>
+    showEditQuoteForm(quotation.id);
   document.getElementById("backBtn").onclick = showList;
 
   listContainer.style.display = "none";
@@ -83,5 +88,65 @@ function showAddQuoteForm() {
 addQuoteBtn.onclick = () => {
   showAddQuoteForm();
 };
+
+function showDeleteQuoteForm(id) {
+  detailsContainer.innerHTML = `
+    <h2>Czy napewno chcesz usunąć ten cytat?</h2>
+    <form id="deleteQuoteForm">
+      <button type="submit" id="confirmdeleteBtn">Usuń</button> 
+      <button type="button" id="cancelAddBtn">Anuluj</button> 
+    </form>
+  `;
+
+  listContainer.style.display = "none";
+  detailsContainer.style.display = "block";
+
+  document.getElementById("cancelAddBtn").onclick = showList;
+
+  document.getElementById("deleteQuoteForm").onsubmit = async (e) => {
+    e.preventDefault();
+    await fetch(`http://localhost:3000/api/quotes/${id}`, {
+      method: "DELETE",
+    });
+    showList();
+    loadQuotes();
+  };
+}
+
+function showEditQuoteForm(id) {
+  detailsContainer.innerHTML = `
+    <h2>Edytuj nowy cytat</h2>
+    <form id="editQuoteForm">
+      <input type="text" id="game" placeholder="Gra" ><br><br> 
+      <input type="text" id="character" placeholder="Postać" ><br><br> 
+      <textarea id="quote" placeholder="Cytat" ></textarea><br><br>
+      <button type="submit" id="submit">Zapisz</button> 
+      <button type="button" id="cancelAddBtn">Anuluj</button> 
+    </form>
+  `;
+
+  listContainer.style.display = "none";
+  detailsContainer.style.display = "block";
+
+  document.getElementById("cancelAddBtn").onclick = showList;
+
+  document.getElementById("editQuoteForm").onsubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedQuote = {
+      game: document.getElementById("game").value,
+      character: document.getElementById("character").value,
+      quote: document.getElementById("quote").value,
+    };
+
+    await fetch(`http://localhost:3000/api/quotes/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedQuote),
+    });
+    showList();
+    loadQuotes();
+  };
+}
 
 loadQuotes();

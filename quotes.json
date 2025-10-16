@@ -4,7 +4,7 @@
     "uuid": "1f6667dd-f2d1-4274-8497-6f5361c5d2fd",
     "character": "Gomez",
     "game": "Gothic 1",
-    "quote": "IIIII?"
+    "quote": "IIII?!!"
   },
   {
     "id": "2",
@@ -19,12 +19,5 @@
     "character": "Miły Bandyta",
     "game": "Gothic 2",
     "quote": "Przybywasz z gór to źle, bardzo źle."
-  },
-  {
-    "id": "4",
-    "uuid": "7052e7cb-6bd6-4ab1-b09c-371c7a0616cf",
-    "character": "Xardas",
-    "game": "Gothic 2",
-    "quote": "Przepędziłeś go to prawda"
   }
 ]
