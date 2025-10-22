@@ -1,11 +1,12 @@
 const { v4: uuidv4 } = require("uuid");
 const mysql = require("mysql2/promise");
+require("dotenv").config();
 
 const dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "quotes",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 let quotes = [];
