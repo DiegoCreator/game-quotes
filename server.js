@@ -34,5 +34,5 @@ app.put("/api/quotes/:id", updateQuote);
 app.delete("/api/quotes/:id", deleteQuote);
 
 app.listen(PORT, () => {
-  console.log(`Serwer działa na http://localhost:${PORT}`);
+  console.log(`Serwer is running on http://localhost:${PORT}`);
 });

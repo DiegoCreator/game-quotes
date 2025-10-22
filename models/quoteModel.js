@@ -1,53 +1,109 @@
-let quotes = require("../quotes.json");
-const path = require("path");
-const { writeDataToFile } = require("../utils");
 const { v4: uuidv4 } = require("uuid");
-const quotesFile = path.join(__dirname, "../quotes.json");
+const mysql = require("mysql2/promise");
+
+const dbConfig = {
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "quotes",
+};
+
+let quotes = [];
 
 async function findAll() {
+  const connection = await mysql.createConnection(dbConfig);
+  const [rows] = await connection.execute("SELECT * FROM quotes");
+  quotes = rows;
+  await connection.end();
   return quotes;
 }
 
 async function findById(id) {
-  return quotes.find((p) => p.id === id);
+  const connection = await mysql.createConnection(dbConfig);
+  const [rows] = await connection.execute("SELECT * FROM quotes WHERE id = ?", [
+    id,
+  ]);
+  quotes = rows;
+  await connection.end();
+  return rows[0];
 }
 
 async function create(quote) {
-  const maxId =
-    quotes.length > 0 ? Math.max(...quotes.map((q) => q.id || 0)) : 0;
+  const connection = await mysql.createConnection(dbConfig);
 
-  const newQuote = { id: String(maxId + 1), uuid: uuidv4(), ...quote };
-  quotes.push(newQuote);
+  try {
+    const [result] = await connection.execute(
+      "INSERT INTO quotes (uuid, `character`, game, quote) VALUES (?, ?, ?, ?)",
+      [
+        quote.uuid || uuidv4(),
+        quote.character || null,
+        quote.game || null,
+        quote.quote || null,
+      ]
+    );
 
-  if (process.env.NODE_ENV !== "test") {
-    await writeDataToFile(quotesFile, quotes);
+    const newQuote = { uuid: uuidv4(), ...quote };
+
+    quotes.push({
+      id: result.insertId,
+      uuid: quote.uuid,
+      character: quote.character,
+      game: quote.game,
+      quote: quote.quote,
+    });
+
+    return newQuote;
+  } finally {
+    await connection.end();
   }
-
-  return newQuote;
 }
 
 async function findByGame(game) {
-  console.log("Searching for game:", game);
-  quotes.forEach((q) => console.log("Game in quote:", q.game));
-  return quotes.filter(
-    (q) => q.game && q.game.trim().toLowerCase() === game.trim().toLowerCase()
-  );
+  const connection = await mysql.createConnection(dbConfig);
+  try {
+    const [rows] = await connection.execute(
+      "SELECT * FROM quotes WHERE LOWER(TRIM(game)) = LOWER(TRIM(?))",
+      [game]
+    );
+    return rows;
+  } catch (err) {
+    console.error("Database error: ", err);
+    return [];
+  } finally {
+    if (connection) {
+      await connection.end();
+    }
+  }
 }
 
 async function update(id, updatedFields) {
-  const index = quotes.findIndex((p) => p.id === id);
-  quotes[index] = { ...quotes[index], ...updatedFields };
-  if (process.env.NODE_ENV !== "test") {
-    await writeDataToFile(quotesFile, quotes);
-  }
+  const connection = await mysql.createConnection(dbConfig);
 
-  return quotes[index];
+  try {
+    const { character, game, quote } = updatedFields;
+    await connection.execute(
+      "UPDATE quotes SET `character` = ?, game = ?, quote = ? WHERE id = ?",
+      [character, game, quote, id]
+    );
+    return { id, character, game, quote };
+  } catch (err) {
+    console.error("Database error: ", err);
+    return null;
+  } finally {
+    await connection.end();
+  }
 }
 
 async function remove(id) {
-  quotes = quotes.filter((p) => p.id !== id);
-  if (process.env.NODE_ENV !== "test") {
-    await writeDataToFile(quotesFile, quotes);
+  const connection = await mysql.createConnection(dbConfig);
+
+  try {
+    await connection.execute("DELETE FROM quotes WHERE id = ?", [id]);
+  } catch (err) {
+    console.error("Database error: ", err);
+    return null;
+  } finally {
+    await connection.end();
   }
 }
 
