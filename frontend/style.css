@@ -164,3 +164,29 @@ button:hover {
 #confirmdeleteBtn:hover {
   background-color: #990000;
 }
+
+/* Style for input in adding and editing */
+
+#game,
+#character {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  margin: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+#quote {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 12px;
+  margin: auto;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: none;
+}

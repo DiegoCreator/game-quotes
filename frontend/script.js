@@ -15,9 +15,9 @@ async function showDetails(id) {
     <h2>${quotation.game}</h2>
     <p><b>${quotation.character}</b></p>
     <blockquote>${quotation.quote}</blockquote>
-    <button id="backBtn">Wróć</button>
-    <button id="deleteBtn" class="delete-btn">Usuń</button>
-    <button id="editBtn" class="edit-btn">Edytuj</button>
+    <button id="backBtn">Back</button>
+    <button id="deleteBtn" class="delete-btn">Delete</button>
+    <button id="editBtn" class="edit-btn">Edit</button>
   `;
 
   document.getElementById("deleteBtn").onclick = () =>
@@ -78,7 +78,6 @@ async function loadQuotes() {
     div.classList.add("quote-card");
     div.textContent = quotation.quote.slice(0, 50) + "...";
     div.onclick = () => {
-      console.log("Kliknięto cytat", quotation.id);
       showDetails(quotation.id);
     };
 
@@ -88,13 +87,13 @@ async function loadQuotes() {
 
 function showAddQuoteForm() {
   detailsContainer.innerHTML = `
-    <h2>Dodaj nowy cytat</h2>
+    <h2>Add new Quote</h2>
     <form id="addQuoteForm">
-      <input type="text" id="game" placeholder="Gra" required><br><br> 
-      <input type="text" id="character" placeholder="Postać" required><br><br> 
-      <textarea id="quote" placeholder="Cytat" required></textarea><br><br>
-      <button type="submit" id="submit">Dodaj</button> 
-      <button type="button" id="cancelAddBtn">Anuluj</button> 
+      <input type="text" id="game" placeholder="Game" required><br><br> 
+      <input type="text" id="character" placeholder="Character" required><br><br> 
+      <textarea id="quote" placeholder="Quote" required></textarea><br><br>
+      <button type="submit" id="submit">Add</button> 
+      <button type="button" id="cancelAddBtn">Cancel</button> 
     </form>
   `;
 
@@ -128,10 +127,10 @@ addQuoteBtn.onclick = () => {
 
 function showDeleteQuoteForm(id) {
   detailsContainer.innerHTML = `
-    <h2>Czy napewno chcesz usunąć ten cytat?</h2>
+    <h2>Are you sure you want to delete this quote?</h2>
     <form id="deleteQuoteForm">
-      <button type="submit" id="confirmdeleteBtn">Usuń</button> 
-      <button type="button" id="cancelAddBtn">Anuluj</button> 
+      <button type="submit" id="confirmdeleteBtn">Delete</button> 
+      <button type="button" id="cancelAddBtn">Cancel</button> 
     </form>
   `;
 
@@ -152,13 +151,13 @@ function showDeleteQuoteForm(id) {
 
 function showEditQuoteForm(id) {
   detailsContainer.innerHTML = `
-    <h2>Edytuj nowy cytat</h2>
+    <h2>Edit Quote</h2>
     <form id="editQuoteForm">
-      <input type="text" id="game" placeholder="Gra" ><br><br> 
-      <input type="text" id="character" placeholder="Postać" ><br><br> 
-      <textarea id="quote" placeholder="Cytat" ></textarea><br><br>
-      <button type="submit" id="submit">Zapisz</button> 
-      <button type="button" id="cancelAddBtn">Anuluj</button> 
+      <input type="text" id="game" placeholder="Game" ><br><br> 
+      <input type="text" id="character" placeholder="Character" ><br><br> 
+      <textarea id="quote" placeholder="Quote" ></textarea><br><br>
+      <button type="submit" id="submit">Save</button> 
+      <button type="button" id="cancelAddBtn">Cancel</button> 
     </form>
   `;
 

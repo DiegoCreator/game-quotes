@@ -1,5 +1,4 @@
 const Quote = require("../models/quoteModel.js");
-let quotes = require("../quotes.json");
 
 // @desc  Gets All Quotes
 // @route GET /api/quotes
