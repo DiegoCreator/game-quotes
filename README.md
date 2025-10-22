@@ -37,7 +37,7 @@ Originally using JSON files for storage, now migrated to a MySQL database for im
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/quotes-app.git
+   git clone https://github.com/DiegoCreator/quotes-app.git
    cd quotes-app
 
 2. **Install dependencies**
@@ -51,10 +51,12 @@ Create a .env file in the root directory and add your database credentials:
    DB_PASSWORD=
    DB_NAME=quotes
 
-5. **Set up the database**
-  Import the provided schema:
-  mysql -u root -p < schema.sql
-6. **Run the server**
+4. **Set up the database**
+   ```bash
+   Import the provided schema:
+   mysql -u root -p < schema.sql
+5. **Run the server**
+   ```bash
    npm run dev
 
 ### **📦 API Endpoints**
