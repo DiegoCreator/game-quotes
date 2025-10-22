@@ -45,14 +45,16 @@ Originally using JSON files for storage, now migrated to a MySQL database for im
 
 3. **Set up environment variables**
 Create a .env file in the root directory and add your database credentials:
-  DB_HOST=localhost
-  DB_USER=root
-  DB_PASSWORD=
-  DB_NAME=quotes
-4. **Set up the database**
+   ```bash
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=
+   DB_NAME=quotes
+
+5. **Set up the database**
   Import the provided schema:
   mysql -u root -p < schema.sql
-5. **Run the server**
+6. **Run the server**
    npm run dev
 
 ### **📦 API Endpoints**
